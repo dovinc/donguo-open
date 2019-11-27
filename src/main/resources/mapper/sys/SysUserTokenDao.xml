@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysUserTokenDao">
+
+	<select id="findByToken" resultType="pers.donguo.open.modules.sys.entity.SysUserToken">
+		select * from sys_user_token where token = #{token}
+	</select>
+	<delete id="deleteByToken" >
+		 delete from sys_user_token where token = #{token}
+	</delete>
+</mapper>

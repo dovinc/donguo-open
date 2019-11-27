@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysUserRoleDao">
+
+
+	<select id="findRoleIdsByUserId" resultType="long">
+		select role_id from sys_user_role where user_id = #{value}
+	</select>
+	
+	<select id="findUserIdsByRoleId" resultType="long">
+		select user_id from sys_user_role where role_id = #{value}
+	</select>
+	
+	<delete id="deleteByUserId">
+		delete from sys_user_role where user_id = #{value}
+	</delete>
+	
+	<delete id="deleteByRoleId">
+		delete from sys_user_role where role_id = #{value}
+	</delete>
+	
+	<delete id="deleteByRoleIdIn">
+		delete from sys_user_role where role_id in
+		<foreach item="roleId" collection="array" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+	
+	
+</mapper>

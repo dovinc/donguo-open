@@ -1,0 +1,68 @@
+server:
+  port: 8888
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/open_course?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+#    url: jdbc:mysql://localhost:3306/open_course?useUnicode=true&characterEncoding=utf-8&useSSL=false&&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+    
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 1200000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: HikariCP
+      max-lifetime: 30000
+      connection-timeout: 3000
+      connection-test-query: SELECT 1
+    
+    
+## 最小空闲连接数量
+#spring.datasource.hikari.minimum-idle=5
+### 空闲连接存活最大时间，默认600000（10分钟）
+#spring.datasource.hikari.idle-timeout=180000
+### 连接池最大连接数，默认是10
+#spring.datasource.hikari.maximum-pool-size=10
+### 此属性控制从池返回的连接的默认自动提交行为,默认值：true
+#spring.datasource.hikari.auto-commit=true
+### 连接池母子
+#spring.datasource.hikari.pool-name=MyHikariCP
+### 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+##show global variables like ‘wait_timeout’;2880
+#spring.datasource.hikari.max-lifetime=1800000
+### 数据库连接超时时间,默认30秒，即30000
+#spring.datasource.hikari.connection-timeout=30000
+#spring.datasource.hikari.connection-test-query=SELECT 1
+# ———————————————— 
+#版权声明：本文为CSDN博主「一介那个书生」的原创文章，遵循CC 4.0 by-sa版权协议，转载请附上原文出处链接及本声明。
+#原文链接：https://blog.csdn.net/qq_32953079/article/details/81502237
+
+    
+    
+    
+    
+    
+#配置springDataJPA相关设置
+  jpa:
+#方言设置
+    database-platform: org.hibernate.dialect.MySQL55Dialect
+    hibernate:
+#配置正向工程
+      ddl-auto: update
+    show-sql: true
+
+##多数据源的配置
+#dynamic:
+#  datasource:
+#    slave1:
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#      url: jdbc:sqlserver://localhost:1433;DatabaseName=renren_security
+#      username: sa
+#      password: 123456
+#    slave2:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://localhost:5432/renren_security
+#      username: renren
+#      password: 123456

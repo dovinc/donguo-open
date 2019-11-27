@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysUserDao">
+	
+	<!-- 关联sys_user_role，sys_role_menu，sys_menu 查询用户的所有权限 -->
+	<select id="findPermissionsByUserId" resultType="String">
+		SELECT
+			DISTINCT(sm.permissions)
+		FROM
+			sys_user_role sur
+		LEFT JOIN sys_role_menu srm ON sur.role_id = srm.role_id
+		LEFT JOIN sys_menu sm ON srm.menu_id = sm.menu_id
+		WHERE
+			sur.user_id = #{userId}
+			AND sm.permissions IS NOT NULL
+			AND sm.permissions != ''
+	</select>
+	
+	<!-- superAdmin 直接查询用户的所有权限 -->
+	<select id="findPermissions" resultType="String">
+		SELECT
+			DISTINCT(permissions)
+		FROM
+			sys_menu
+		WHERE
+		permissions IS NOT NULL
+		AND permissions != ''
+	</select>
+	
+	<!-- 查询关联sys_user_role，sys_role_menu 查询用户菜单的Id --> 
+	<select id="findMenuIdsByUserId" resultType="Long">
+		SELECT DISTINCT
+			srm.menu_id
+		FROM
+			sys_user_role sur
+		LEFT JOIN sys_role_menu srm ON sur.role_id = srm.role_id
+		WHERE
+			sur.user_id = #{userId}
+	</select>
+	
+	<select id="findUserByUsername" resultType="pers.donguo.open.modules.sys.entity.SysUser">
+		select * from sys_user where username = #{username}
+	</select>
+
+</mapper>

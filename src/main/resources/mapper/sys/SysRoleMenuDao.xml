@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysRoleMenuDao">
+
+	<select id="findReafMenuIdsByRoleIds" resultType="long">
+		SELECT
+			srm.menu_id
+		FROM
+			sys_role_menu srm
+		LEFT JOIN sys_menu sm ON srm.menu_id = sm.parent_id
+		WHERE srm.role_id IN
+		<foreach item="roleId" collection="array" open="("
+			separator="," close=")">
+			#{roleId}
+		</foreach>
+		GROUP BY
+			srm.menu_id
+		HAVING
+			count(sm.menu_id) = 0
+	</select>
+
+	<delete id="deleteByRoleId">
+		delete from sys_role_menu where role_id = #{roleId}
+	</delete>
+
+	<delete id="deleteByRoleIdIn">
+		delete from sys_role_menu where role_id in
+		<foreach item="roleId" collection="array" open="("
+			separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+
+</mapper>

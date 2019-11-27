@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysMenuDao">
+
+	<select id="findByParentIdAndMenuIdInAndTypeNotEquals" resultType="pers.donguo.open.modules.sys.entity.SysMenu">
+		SELECT
+			*
+		FROM
+			sys_menu
+		WHERE
+			parent_id = #{parentId}
+		<if test="menuIds != null and menuIds.length > 0">
+			AND menu_id IN
+			<foreach collection="menuIds" item="menuId" index="i" open="(" close=")" separator=",">
+				#{menuId}
+			</foreach>
+		</if>
+		<if test="type != null">
+			AND type != #{type}
+		</if>
+		ORDER BY
+			order_num ASC
+	</select>
+	
+	<select id="findByParentId" resultType="pers.donguo.open.modules.sys.entity.SysMenu">
+		SELECT
+			*
+		FROM
+			sys_menu
+		WHERE
+			parent_id = #{parentId}
+		ORDER BY
+			order_num ASC
+	</select>
+	
+
+</mapper>
