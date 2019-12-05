@@ -16,7 +16,7 @@ public class R extends HashMap<String, Object> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public R() {
 		put("code", Code.OK.value);
 		put("msg", Code.OK.description);
@@ -26,6 +26,13 @@ public class R extends HashMap<String, Object> {
 		put("code", Code.OK.value);
 		put("msg", Code.OK.description);
 		put(key, value);
+	}
+
+	public static R ok() {
+		R r = new R();
+		r.put("msg", "操作成功！");
+		return r;
+
 	}
 
 	public static R ok(String msg) {
@@ -48,6 +55,7 @@ public class R extends HashMap<String, Object> {
 		return r;
 
 	}
+
 	/**
 	 * @title: error
 	 * @Description: R's error
@@ -70,7 +78,7 @@ public class R extends HashMap<String, Object> {
 		r.put("msg", msg);
 		return r;
 	}
-	
+
 	public static R error(int code, Exception e) {
 		R r = new R();
 		if (code != Code.OK.value)
@@ -80,29 +88,29 @@ public class R extends HashMap<String, Object> {
 		r.put("msg", e.getMessage());
 		return r;
 	}
-	
+
 	public static R error(Exception e) {
 		return error(Code.INTERNAL_SERVER_ERROR.value, e);
 	}
-	
+
 	public static R error(Code code) {
-		if(code == null)
+		if (code == null)
 			throw new NullPointerException("ResponseCode can not be null !");
 		R r = new R();
 		r.put("code", code.value);
 		r.put("msg", code.description);
 		return r;
 	}
-	
+
 	public static R error(HttpStatus status) {
-		if(status == null)
+		if (status == null)
 			throw new NullPointerException("HttpStatus can not be null !");
 		R r = new R();
 		r.put("code", status.value());
 		r.put("msg", status.getReasonPhrase());
 		return r;
 	}
-	
+
 	/**
 	 * 以下为带有返回实例的R返回值
 	 * @param msg
@@ -113,13 +121,13 @@ public class R extends HashMap<String, Object> {
 		r.put("resultObj", resultObj);
 		return r;
 	}
-	
+
 	public static R withResultObj(String key, Object value) {
 		HashMap<String, Object> resultObj = new HashMap<>();
 		resultObj.put(key, value);
 		return withResultObj(resultObj);
 	}
-	
+
 	/**
 	 * <p>Title: R.java enum Code</p>
 	 * <p>Description: 返回编码enum</p>
@@ -127,7 +135,7 @@ public class R extends HashMap<String, Object> {
 	 * @date 2019年10月14日
 	 * @version 1.0
 	 */
-	public enum Code{
+	public enum Code {
 		/**
 		 * D: 服务端正常返回
 		 */
@@ -144,7 +152,7 @@ public class R extends HashMap<String, Object> {
 		 * D: 无法找到指定位置的资源。
 		 */
 		NOT_FOUND(404, "Not Found", "无法找到指定位置的资源。"),
-		
+
 		/**
 		 * D：服务端错误
 		 */
@@ -152,7 +160,8 @@ public class R extends HashMap<String, Object> {
 		private int value;
 		private String name;
 		private String description;
-		Code(int value, String name,String description) {
+
+		Code(int value, String name, String description) {
 			this.value = value;
 			this.name = name;
 			this.description = description;
@@ -165,7 +174,7 @@ public class R extends HashMap<String, Object> {
 		public String getName() {
 			return name;
 		}
-		
+
 		public String getDescription() {
 			return description;
 		}

@@ -7,11 +7,14 @@ package pers.donguo.open.common.exception;
  * @date 2019年10月14日
  * @version 1.0
  */
-public class SysParamNullPointerException extends SysException {
+public class SysBeanException extends SysException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+	public SysBeanException(String msg) {
+		super(msg);
+	}
 }

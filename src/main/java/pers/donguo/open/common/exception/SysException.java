@@ -1,4 +1,7 @@
 package pers.donguo.open.common.exception;
+
+import org.springframework.http.HttpStatus;
+
 /**
  * <p>Title: SysException.java </p>
  * <p>Description: 系统业务异常</p>
@@ -14,25 +17,26 @@ public class SysException extends RuntimeException {
 	/**
 	 * 异常编码 默认500
 	 */
-	private int code = 500;
+	private int code = HttpStatus.INTERNAL_SERVER_ERROR.value();
+
 	public SysException() {
 		super();
 	}
-	
+
 	public SysException(String msg) {
 		super(msg);
 	}
-	
+
 	public SysException(int code, String msg) {
 		super(msg);
 		this.code = code;
 	}
-	
+
 	public SysException(int code, String msg, Throwable e) {
 		super(msg, e);
 		this.code = code;
 	}
-	
+
 	public int getCode() {
 		return this.code;
 	}

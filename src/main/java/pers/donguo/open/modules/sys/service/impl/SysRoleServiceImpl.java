@@ -28,13 +28,12 @@ import pers.donguo.open.modules.sys.service.SysRoleService;
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRole> implements SysRoleService {
 	@Autowired
 	SysRoleMenuDao sysRoleMenuDao;
-	
+
+	@Override
 	public IPage<SysRole> pageList(Page<SysRole> page, SysRoleQuery roleQuery) {
 		String roleName = roleQuery.getRoleName();
 		IPage<SysRole> pageInfo = this.page(page,
-			new QueryWrapper<SysRole>()
-				.like(StrUtil.isNotBlank(roleName),"roleName", roleName)
-		);
+				new QueryWrapper<SysRole>().like(StrUtil.isNotBlank(roleName), "roleName", roleName));
 		return pageInfo;
 	}
 
@@ -44,7 +43,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRole> impleme
 		baseMapper.insert(role);
 		Long roleId = role.getRoleId();
 		int len = menuIds.length;
-		for(int i = 0; i < len; i++) {
+		for (int i = 0; i < len; i++) {
 			SysRoleMenu roleMenu = new SysRoleMenu();
 			roleMenu.setMenuId(menuIds[i]);
 			roleMenu.setRoleId(roleId);
@@ -59,7 +58,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleDao, SysRole> impleme
 		sysRoleMenuDao.deleteByRoleId(role.getRoleId());
 		Long roleId = role.getRoleId();
 		int len = menuIds.length;
-		for(int i = 0; i < len; i++) {
+		for (int i = 0; i < len; i++) {
 			SysRoleMenu roleMenu = new SysRoleMenu();
 			roleMenu.setMenuId(menuIds[i]);
 			roleMenu.setRoleId(roleId);

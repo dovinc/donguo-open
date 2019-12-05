@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pers.donguo.open.modules.sys.repo.SysAttrValueDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="pers.donguo.open.modules.sys.entity.SysAttrValue" id="baseMap">
+        <result property="attrValueId" column="attr_value_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="level" column="level"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="typeCode" column="type_code"/>
+        <result property="value" column="value"/>
+        <result property="description" column="description"/>
+        <result property="remark" column="remark"/>
+        <result property="orderNum" column="order_num"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+
+</mapper>
