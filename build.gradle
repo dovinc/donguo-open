@@ -37,6 +37,11 @@ dependencies {
 	implementation 'com.baomidou:mybatis-plus-boot-starter:3.2.0'
 	//hutool 工具包
 	implementation 'cn.hutool:hutool-all:4.6.7'
+	
+	// https://mvnrepository.com/artifact/org.freemarker/freemarker
+	implementation 'org.freemarker:freemarker:2.3.29'
+	implementation 'com.baomidou:mybatis-plus-generator:3.3.0'
+	
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

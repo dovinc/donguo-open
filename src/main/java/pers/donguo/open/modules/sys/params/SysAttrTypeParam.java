@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import lombok.Data;
 import pers.donguo.open.common.base.ToConverter;
-import pers.donguo.open.modules.sys.entity.SysAttr;
+import pers.donguo.open.modules.sys.entity.SysAttrType;
 
 /**
- * <p>Title: SysAttrParam.java </p>
+ * <p>Title: SysAttrTypeParam.java </p>
  * <p>Description: 系统属性  保存或更新时的参数类</p>
  * @author Penguin
  * @date 2019年12月1日
  * @version 1.0
  */
 @Data
-public class SysAttrParam implements Serializable, ToConverter<SysAttr> {
+public class SysAttrTypeParam implements Serializable, ToConverter<SysAttrType> {
 	private static final long serialVersionUID = 1L;
 
 	private Long attrId;

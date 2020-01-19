@@ -18,23 +18,30 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import pers.donguo.open.common.base.BasicController;
 import pers.donguo.open.common.utils.R;
 import pers.donguo.open.modules.sys.dto.base.PageDTO;
-import pers.donguo.open.modules.sys.entity.SysAttrValue;
-import pers.donguo.open.modules.sys.params.SysAttrValueQuery;
+import pers.donguo.open.modules.sys.entity.SysAttrItem;
+import pers.donguo.open.modules.sys.params.SysAttrItemQuery;
 import pers.donguo.open.modules.sys.params.base.PageQuery;
-import pers.donguo.open.modules.sys.service.SysAttrValueService;
+import pers.donguo.open.modules.sys.service.SysAttrItemService;
 
+/**
+ * <p>Title: SysAttrItemController.java </p>
+ * <p>Description: 属性值项表 前端控制器</p>
+ * @author Penguin
+ * @date 2019年12月29日
+ * @version 1.0
+ */
 @RestController
-@RequestMapping("sys/attr-values")
-public class SysAttrValueController extends BasicController<SysAttrValue, SysAttrValueService> {
+@RequestMapping("/sys/attr-items")
+public class SysAttrItemController extends BasicController<SysAttrItem, SysAttrItemService> {
 	/**
 	 * 列表
 	 */
 	@GetMapping()
 //	@RequiresPermissions("sys:attrvalues:get:list")
-	public R list(@Validated PageQuery pageQuery, @Validated SysAttrValueQuery attrValueQuery) {
+	public R list(@Validated PageQuery pageQuery, @Validated SysAttrItemQuery attrItemQuery) {
 		Integer page = pageQuery.getPage();
 		Integer limit = pageQuery.getLimit();
-		IPage<SysAttrValue> pageInfo = baseService.pageList(new Page<SysAttrValue>(page, limit), attrValueQuery);
+		IPage<SysAttrItem> pageInfo = baseService.pageList(new Page<SysAttrItem>(page, limit), attrItemQuery);
 		PageDTO pageDTO = new PageDTO(pageInfo);
 		return R.withResultObj(pageDTO);
 	}
@@ -42,12 +49,11 @@ public class SysAttrValueController extends BasicController<SysAttrValue, SysAtt
 	/**
 	 * 信息
 	 */
-	@GetMapping("/{attrValueId}")
+	@GetMapping("/{attrItemId}")
 //	@RequiresPermissions("sys:attrvalues:get")
-	public R info(@PathVariable("attrValueId") Integer attrValueId) {
-		SysAttrValue sysAttrValue = baseService.getById(attrValueId);
-
-		return R.withResultObj(sysAttrValue);
+	public R info(@PathVariable("attrItemId") Integer attrItemId) {
+		SysAttrItem SysAttrItem = baseService.getById(attrItemId);
+		return R.withResultObj(SysAttrItem);
 	}
 
 	/**
@@ -55,8 +61,8 @@ public class SysAttrValueController extends BasicController<SysAttrValue, SysAtt
 	 */
 	@PostMapping()
 //	@RequiresPermissions("sys:attrvalues:post")
-	public R save(@RequestBody SysAttrValue sysAttrValue) {
-		baseService.save(sysAttrValue);
+	public R save(@RequestBody SysAttrItem sysAttrItem) {
+		baseService.save(sysAttrItem);
 
 		return R.ok();
 	}
@@ -66,8 +72,8 @@ public class SysAttrValueController extends BasicController<SysAttrValue, SysAtt
 	 */
 	@PutMapping()
 //	@RequiresPermissions("sys:attrvalues:put")
-	public R update(@RequestBody SysAttrValue sysAttrValue) {
-		baseService.updateById(sysAttrValue);
+	public R update(@RequestBody SysAttrItem sysAttrItem) {
+		baseService.updateById(sysAttrItem);
 		return R.ok();
 	}
 
@@ -76,8 +82,8 @@ public class SysAttrValueController extends BasicController<SysAttrValue, SysAtt
 	 */
 	@DeleteMapping()
 //	@RequiresPermissions("sys:attrvalues:delete")
-	public R delete(@RequestBody Integer[] attrValueIds) {
-		baseService.removeByIds(Arrays.asList(attrValueIds));
+	public R delete(@RequestBody Integer[] attrItemIds) {
+		baseService.removeByIds(Arrays.asList(attrItemIds));
 		return R.ok();
 	}
 

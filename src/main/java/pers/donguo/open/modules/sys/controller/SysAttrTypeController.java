@@ -18,24 +18,31 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import pers.donguo.open.common.base.BasicController;
 import pers.donguo.open.common.utils.R;
 import pers.donguo.open.modules.sys.dto.base.PageDTO;
-import pers.donguo.open.modules.sys.entity.SysAttr;
-import pers.donguo.open.modules.sys.params.SysAttrParam;
-import pers.donguo.open.modules.sys.params.SysAttrQuery;
+import pers.donguo.open.modules.sys.entity.SysAttrType;
+import pers.donguo.open.modules.sys.params.SysAttrTypeParam;
+import pers.donguo.open.modules.sys.params.SysAttrTypeQuery;
 import pers.donguo.open.modules.sys.params.base.PageQuery;
-import pers.donguo.open.modules.sys.service.SysAttrService;
+import pers.donguo.open.modules.sys.service.SysAttrTypeService;
 
+/**
+ * <p>Title: SysAttrTypeController.java </p>
+ * <p>Description: 系统属性表 前端控制器</p>
+ * @author Penguin
+ * @date 2019年12月29日
+ * @version 1.0
+ */
 @RestController
-@RequestMapping("sys/attrs")
-public class SysAttrController extends BasicController<SysAttr, SysAttrService> {
+@RequestMapping("/sys/attr-types")
+public class SysAttrTypeController extends BasicController<SysAttrType, SysAttrTypeService> {
 	/**
 	 * 列表
 	 */
 	@GetMapping()
 //	@RequiresPermissions("sys:attrs:get:list")
-	public R list(@Validated PageQuery pageQuery, @Validated SysAttrQuery sysAttrQuery) {
+	public R list(@Validated PageQuery pageQuery, @Validated SysAttrTypeQuery attrTypeQuery) {
 		Integer page = pageQuery.getPage();
 		Integer limit = pageQuery.getLimit();
-		IPage<SysAttr> pageInfo = baseService.pageList(new Page<SysAttr>(page, limit), sysAttrQuery);
+		IPage<SysAttrType> pageInfo = baseService.pageList(new Page<SysAttrType>(page, limit), attrTypeQuery);
 		PageDTO pageDTO = new PageDTO(pageInfo);
 
 		return R.withResultObj(pageDTO);
@@ -44,11 +51,11 @@ public class SysAttrController extends BasicController<SysAttr, SysAttrService> 
 	/**
 	 * 信息
 	 */
-	@GetMapping("/{attrId}")
+	@GetMapping("/{attrTypeId}")
 //	@RequiresPermissions("sys:attrs:get")
-	public R info(@PathVariable("attrId") Long attrId) {
-		SysAttr attr = baseService.getById(attrId);
-		return R.withResultObj(attr);
+	public R info(@PathVariable("attrTypeId") Long attrTypeId) {
+		SysAttrType attrType = baseService.getById(attrTypeId);
+		return R.withResultObj(attrType);
 	}
 
 	/**
@@ -56,8 +63,8 @@ public class SysAttrController extends BasicController<SysAttr, SysAttrService> 
 	 */
 	@PostMapping()
 //	@RequiresPermissions("sys:attrs:post")
-	public R save(@RequestBody SysAttrParam attrParam) {
-		baseService.save(attrParam.convertTo());
+	public R save(@RequestBody SysAttrTypeParam attrTypeParam) {
+		baseService.save(attrTypeParam.convertTo());
 		return R.ok();
 	}
 
@@ -66,9 +73,8 @@ public class SysAttrController extends BasicController<SysAttr, SysAttrService> 
 	 */
 	@PutMapping()
 //	@RequiresPermissions("sys:attrs:put")
-	public R update(SysAttrParam attrParam) {
-
-		baseService.updateById(attrParam.convertTo());
+	public R update(SysAttrTypeParam attrTypeParam) {
+		baseService.updateById(attrTypeParam.convertTo());
 		return R.ok();
 	}
 
@@ -77,8 +83,8 @@ public class SysAttrController extends BasicController<SysAttr, SysAttrService> 
 	 */
 	@DeleteMapping()
 //	@RequiresPermissions("sys:attrs:delete")
-	public R delete(@RequestBody Long[] attrIds) {
-		baseService.removeByIds(Arrays.asList(attrIds));
+	public R delete(@RequestBody Long[] attrTypeIds) {
+		baseService.removeByIds(Arrays.asList(attrTypeIds));
 		return R.ok();
 	}
 }

@@ -10,5 +10,5 @@ import lombok.Data;
  * @version 1.0
  */
 @Data
-public class SysAttrValueQuery {
+public class SysAttrItemQuery {
 }
