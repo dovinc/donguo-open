@@ -29,8 +29,8 @@ public class SysAttrItem implements Serializable {
 	/**
 	 * 属性值表主键
 	 */
-	@TableId(value = "attr_value_id", type = IdType.AUTO)
-	private Integer attrValueId;
+	@TableId(value = "attr_item_id", type = IdType.AUTO)
+	private Integer attrItemId;
 
 	/**
 	 * 属性值类型编码对应属性表中的编码
@@ -61,11 +61,6 @@ public class SysAttrItem implements Serializable {
 	 * 存库属性值
 	 */
 	private String value;
-
-	/**
-	 * 描述
-	 */
-	private String description;
 
 	/**
 	 * 备注

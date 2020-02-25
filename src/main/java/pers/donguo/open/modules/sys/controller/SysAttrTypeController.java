@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -63,7 +62,7 @@ public class SysAttrTypeController extends BasicController<SysAttrType, SysAttrT
 	 */
 	@PostMapping()
 //	@RequiresPermissions("sys:attrs:post")
-	public R save(@RequestBody SysAttrTypeParam attrTypeParam) {
+	public R save(SysAttrTypeParam attrTypeParam) {
 		baseService.save(attrTypeParam.convertTo());
 		return R.ok();
 	}
@@ -81,9 +80,19 @@ public class SysAttrTypeController extends BasicController<SysAttrType, SysAttrT
 	/**
 	 * 删除
 	 */
-	@DeleteMapping()
+	@DeleteMapping("/{attrTypeId}")
 //	@RequiresPermissions("sys:attrs:delete")
-	public R delete(@RequestBody Long[] attrTypeIds) {
+	public R delete(@PathVariable Long attrTypeId) {
+		baseService.removeById(attrTypeId);
+		return R.ok("删除成功");
+	}
+
+	/**
+	 * 批量删除
+	 */
+	@DeleteMapping("/batch")
+//	@RequiresPermissions("sys:attrs:delete")
+	public R deleteBatch(Long[] attrTypeIds) {
 		baseService.removeByIds(Arrays.asList(attrTypeIds));
 		return R.ok();
 	}

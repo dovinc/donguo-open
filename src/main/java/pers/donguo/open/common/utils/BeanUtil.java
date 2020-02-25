@@ -27,6 +27,22 @@ public class BeanUtil {
 		}
 	}
 
+	@Nullable
+	public static <T> T transformFrom(@Nullable Object source, @NonNull T target) {
+		Assert.notNull(target.getClass().getName(), "Target class must not be null");
+		if (source == null) {
+			return null;
+		}
+		try {
+			cn.hutool.core.bean.BeanUtil.copyProperties(source, target,
+					CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+			return target;
+		} catch (Exception e) {
+			throw new SysBeanException("Bean transform exception cause: Faild to new" + target.getClass().getName()
+					+ " instance or copyProperties!");
+		}
+	}
+
 	public static void updateProperties(@NonNull Object source, @NonNull Object target) {
 		Assert.notNull(source, "Param source must not be null");
 		Assert.notNull(target, "Param target object must not be null");

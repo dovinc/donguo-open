@@ -1,7 +1,5 @@
 package pers.donguo.open.modules.sys.params;
 
-import java.io.Serializable;
-
 import lombok.Data;
 import pers.donguo.open.common.base.ToConverter;
 import pers.donguo.open.modules.sys.entity.SysAttrType;
@@ -14,20 +12,19 @@ import pers.donguo.open.modules.sys.entity.SysAttrType;
  * @version 1.0
  */
 @Data
-public class SysAttrTypeParam implements Serializable, ToConverter<SysAttrType> {
-	private static final long serialVersionUID = 1L;
+public class SysAttrTypeParam implements ToConverter<SysAttrType> {
 
-	private Long attrId;
+	private Long attrTypeId;
 	/**
-	 * 属性名
+	 * 字典类型名
 	 */
-	private String name;
+	private String title;
 	/**
-	 * 属性值
+	 * 字典类型编码
 	 */
-	private String value;
+	private String code;
 	/**
-	 * 属性描述
+	 * 描述
 	 */
 	private String description;
 	/**

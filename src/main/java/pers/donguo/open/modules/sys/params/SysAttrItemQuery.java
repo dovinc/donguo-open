@@ -1,5 +1,7 @@
 package pers.donguo.open.modules.sys.params;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 /**
@@ -11,4 +13,6 @@ import lombok.Data;
  */
 @Data
 public class SysAttrItemQuery {
+	@NotNull(message = "The param attrTypeCode cannot be null!")
+	private String attrTypeCode;
 }

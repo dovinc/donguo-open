@@ -17,7 +17,7 @@ import pers.donguo.open.modules.sys.params.SysAttrItemQuery;
 public interface SysAttrItemService extends IService<SysAttrItem> {
 	/**
 	 * @title: pageList
-	 * @Description: SysAttrValueService's pageList |  动态查询 分页列表
+	 * @Description: SysAttrItemService's pageList |  动态查询 分页列表
 	 * @param page
 	 * @param attrValueQuery
 	 * @return
